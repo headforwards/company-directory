@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+This won't run without a config file and an org in Azure Active directory.
+See [the Microsoft js tutorial](https://docs.microsoft.com/en-us/graph/tutorials/react?tutorial-step=3) for infor on setting that up.
 
 ## Available Scripts
 
