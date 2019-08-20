@@ -1,6 +1,6 @@
 
 This won't run without a config file and an org in Azure Active directory.
-See [the Microsoft js tutorial](https://docs.microsoft.com/en-us/graph/tutorials/react?tutorial-step=3) for infor on setting that up.
+See [the Microsoft js tutorial](https://docs.microsoft.com/en-us/graph/tutorials/react?tutorial-step=3) for info on setting that up.
 
 ## Available Scripts
 
