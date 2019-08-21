@@ -16,7 +16,7 @@ const getAuthenticatedClient = (accessToken: any) => {
 export const getUserDetails = async (accessToken: any) => {
   const client = getAuthenticatedClient(accessToken);
   const user = await client.api('/me').get();
-  
+
   return user;
 }
 
