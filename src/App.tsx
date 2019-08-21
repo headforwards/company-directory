@@ -1,13 +1,13 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import config from './Config'
 import { UserAgentApplication } from 'msal'
+import { getUserDetails } from './GraphService'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import NavBar from './components/NavBar/NavBar';
 import ErrorMessage, { ErrorMessageProps } from './components/ErrorMessage';
 import Welcome from './components/Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
-import { logicalExpression } from '@babel/types';
 
 const App: React.SFC = () => {
 
@@ -66,14 +66,31 @@ const App: React.SFC = () => {
 
       if (accessToken) {
         // TEMPORARY: Display the token in the error flash
+        const user = await getUserDetails(accessToken)
         setAuthenticated(true)
-        setError({ message: "Access token:", debugProp: accessToken.accessToken })
+        setUser({
+          displayName: user.displayName,
+          email: user.email || user.userPrincipalName
+        })
+        setError(null)
       }
     }
     catch (err) {
-      var errParts = err.split('|');
+      let error = {message: '', debugProp:''}
+      if(typeof(err) === 'string'){
+        var errParts = err.split('|');
+        error = errParts.length > 1 ?
+        { message: errParts[1], debugProp: errParts[0] } :
+        { message: err, debugProp:'' };
+      } else {
+        error = {
+          message: err.message,
+          debugProp: JSON.stringify(err)
+        }
+      }
+      
       setAuthenticated(false)
-      setError({ message: errParts[1], debugProp: errParts[0] })
+      setError(error)
       setUser({})
     }
   }

@@ -41,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@microsoft/microsoft-graph-types": "^1.10.0"
   }
 }
