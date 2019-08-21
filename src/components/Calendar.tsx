@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import moment from 'moment';
+import _ from 'lodash'
 import config from '../Config';
 import { getEvents } from '../GraphService';
 
+import * as MicrosoftGraph from '@microsoft/microsoft-graph-types'
 
 // Helper function to format Graph date/time
 function formatDateTime(dateTime: Date) {
@@ -35,7 +37,32 @@ export const Calendar: React.SFC = () => {
 
 
     return (
-        <pre><code>{JSON.stringify(eventsData, null, 2)}</code></pre>
+        <div>
+            <h1>Calendar</h1>
+            <Table>
+                <thead>
+                    <tr>
+                        <th scope="col">Organizer</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {eventsData.map(
+                        function (event: MicrosoftGraph.Event) {
+                            return (
+                                <tr key={event.id}>
+                                    <td>{_.get(event,'organizer.emailAddress.name')}</td>
+                                    <td>{event.subject}</td>
+                                    <td>{formatDateTime(_.get(event,'start.dateTime'))}</td>
+                                    <td>{formatDateTime(_.get(event,'end.dateTime'))}</td>
+                                </tr>
+                            );
+                        })}
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

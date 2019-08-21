@@ -43,7 +43,7 @@ const App: React.SFC = () => {
       await getUserProfile();
     }
     catch (err) {
-      var errParts = err.split('|');
+      var errParts = err.toString().split('|');
       setAuthenticated(false)
       setError({ message: errParts[1], debugProp: errParts[0] })
       setUser({})
