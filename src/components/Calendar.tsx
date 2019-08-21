@@ -4,14 +4,13 @@ import moment from 'moment';
 import config from '../Config';
 import { getEvents } from '../GraphService';
 
+
 // Helper function to format Graph date/time
-function formatDateTime(dateTime) {
+function formatDateTime(dateTime: Date) {
     return moment.utc(dateTime).local().format('M/D/YY h:mm A');
 }
 
 export const Calendar: React.SFC = () => {
-
-
     const [eventsData, updateEvents] = useState([])
 
     async function componentDidMount() {
@@ -23,16 +22,17 @@ export const Calendar: React.SFC = () => {
             // Get the user's events
             var events = await getEvents(accessToken);
             // Update the array of events in state
-            this.setState({ events: events.value });
+            updateEvents(events.value);
         }
         catch (err) {
-            this.props.showError('ERROR', JSON.stringify(err));
+            //showError('ERROR', JSON.stringify(err)); //Aargh, can't figure out how to define the passed function in props
         }
     }
 
 
     return (
-        <pre><code>{JSON.stringify(this.state.events, null, 2)}</code></pre>
+        <pre><code>{JSON.stringify(eventsData, null, 2)}</code></pre>
     );
-
 }
+
+export default Calendar
