@@ -5,6 +5,7 @@ import { getUserDetails } from './GraphService'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import NavBar from './components/NavBar/NavBar';
+import Calendar from './components/Calendar'
 import ErrorMessage, { ErrorMessageProps } from './components/ErrorMessage';
 import Welcome from './components/Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -76,19 +77,19 @@ const App: React.SFC = () => {
       }
     }
     catch (err) {
-      let error = {message: '', debugProp:''}
-      if(typeof(err) === 'string'){
+      let error = { message: '', debugProp: '' }
+      if (typeof (err) === 'string') {
         var errParts = err.split('|');
         error = errParts.length > 1 ?
-        { message: errParts[1], debugProp: errParts[0] } :
-        { message: err, debugProp:'' };
+          { message: errParts[1], debugProp: errParts[0] } :
+          { message: err, debugProp: '' };
       } else {
         error = {
           message: err.message,
           debugProp: JSON.stringify(err)
         }
       }
-      
+
       setAuthenticated(false)
       setError(error)
       setUser({})
@@ -112,6 +113,12 @@ const App: React.SFC = () => {
                 authButtonMethod={login}
               />
             } />
+          <Route exact path="/calendar"
+            render={(props) =>
+              <Calendar 
+                />
+            }
+          />
         </Container>
       </div>
     </Router>
