@@ -36,6 +36,15 @@ const NavBar: React.SFC<NavBarProps> = ({ isAuthenticated, user, authButtonMetho
     );
   }
 
+  let peopleLink = null;
+  if (isAuthenticated) {
+    peopleLink = (
+      <NavItem>
+        <RouterNavLink to="/people" className="nav-link" exact>People</RouterNavLink>
+      </NavItem>
+    );
+  }
+
   return (
     <div>
       <Navbar color="dark" dark expand="md" fixed="top">
@@ -48,6 +57,7 @@ const NavBar: React.SFC<NavBarProps> = ({ isAuthenticated, user, authButtonMetho
                 <RouterNavLink to="/" className="nav-link" exact>Home</RouterNavLink>
               </NavItem>
               {calendarLink}
+              {peopleLink}
             </Nav>
             <Nav className="justify-content-end" navbar>
               <NavItem>

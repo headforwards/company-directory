@@ -5,9 +5,10 @@ import { getUserDetails } from './GraphService'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import NavBar from './components/NavBar/NavBar';
-import Calendar from './components/Calendar'
+import Welcome from './pages/Welcome';
+import Calendar from './pages/Calendar'
+import People from './pages/People'
 import ErrorMessage, { ErrorMessageProps } from './components/ErrorMessage';
-import Welcome from './components/Welcome';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const App: React.SFC = () => {
@@ -116,6 +117,12 @@ const App: React.SFC = () => {
           <Route exact path="/calendar"
             render={(props) =>
               <Calendar 
+                />
+            }
+          />
+          <Route exact path="/people"
+            render={(props) =>
+              <People 
                 />
             }
           />

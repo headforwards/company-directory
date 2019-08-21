@@ -30,3 +30,27 @@ export const getEvents = async (accessToken: any) => {
 
   return events
 }
+
+export async function getPeople(accessToken: string) {
+  const client = getAuthenticatedClient(accessToken)
+
+  const people = await client
+    .api('users')
+    .top(300)
+    .get()
+  console.log('getPeople')
+  return people
+}
+
+export async function getPhotoForUser(accessToken: string, userId: string) {
+  const client = getAuthenticatedClient(accessToken)
+
+  const photo = await client
+    .api(`users/${userId}/photo/$value`)
+    .get()
+
+  const url = window.URL || (window as any).webkitURL;
+  const blobUrl = url.createObjectURL(photo);
+  console.log(`getAvatar for ${userId}` )
+  return blobUrl
+}
