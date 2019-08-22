@@ -1,6 +1,7 @@
 
-This won't run without a config file and an org in Azure Active directory.
-See [the Microsoft js tutorial](https://docs.microsoft.com/en-us/graph/tutorials/react?tutorial-step=3) for info on setting that up. That file is excluded from Source control to avoid putting the app access token into Github
+This won't run without an app ID from Azure Active directory configured in a .env file.
+See [the Microsoft js tutorial](https://docs.microsoft.com/en-us/graph/tutorials/react?tutorial-step=3) for info on setting that up. 
+That file is excluded from Source control to avoid putting the app access token into Github
 
 This app based on the [tutorial from MS for viewing calendar events](https://docs.microsoft.com/en-us/graph/tutorials/react), but converted to Typescript and using functional components with Hooks rather than class components.
 
