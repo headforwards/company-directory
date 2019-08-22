@@ -23,10 +23,10 @@ export const getUserDetails = async (accessToken: any) => {
 export const getEvents = async (accessToken: any) => {
   const client = getAuthenticatedClient(accessToken)
   const events = await client
-  .api('/me/events')
-  .select('subject, organizer, start, end')
-  .orderby('createdDateTime DESC')
-  .get()
+    .api('/me/events')
+    .select('subject, organizer, start, end')
+    .orderby('createdDateTime DESC')
+    .get()
 
   return events
 }
@@ -44,13 +44,18 @@ export async function getPeople(accessToken: string) {
 
 export async function getPhotoForUser(accessToken: string, userId: string) {
   const client = getAuthenticatedClient(accessToken)
+  let blobUrl: string | undefined
+  try {
+    const photo = await client
+      .api(`users/${userId}/photo/$value`)
+      .get()
 
-  const photo = await client
-    .api(`users/${userId}/photo/$value`)
-    .get()
-
-  const url = window.URL || (window as any).webkitURL;
-  const blobUrl = url.createObjectURL(photo);
-  console.log(`getAvatar for ${userId}` )
+    const url = window.URL || (window as any).webkitURL;
+    blobUrl = url.createObjectURL(photo);
+    console.log(`Got Avatar for ${userId}`)
+  } catch (err) {
+    blobUrl = undefined
+    console.log(`No Avatar for ${userId}`)
+  }
   return blobUrl
 }

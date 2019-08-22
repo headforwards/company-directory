@@ -10,7 +10,7 @@ interface AvatarProps {
 
 const Avatar: React.SFC<AvatarProps> = ({accessToken, userId, displayName}) => {
 
-    const [imageUrl, setImageUrl] = useState('')
+    const [imageUrl, setImageUrl] = useState<string|undefined>('')
 
     useEffect(() => {
         async function getAvatar() {
@@ -25,19 +25,18 @@ const Avatar: React.SFC<AvatarProps> = ({accessToken, userId, displayName}) => {
             }
         }
         getAvatar()
-    }, [])
+    }, [userId, accessToken, displayName])
 
-    if (accessToken === '') {
-        return (
-            <>
-            </>
-        )
-    }
+ if (imageUrl) {
     return (
         <>
             <img src={imageUrl} title={displayName} alt={displayName} />
         </>
     )
+ } else return (
+     <>
+     </>
+ )
 
 }
 
