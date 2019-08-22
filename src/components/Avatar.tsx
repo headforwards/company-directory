@@ -30,7 +30,7 @@ const Avatar: React.SFC<AvatarProps> = ({accessToken, userId, displayName}) => {
  if (imageUrl) {
     return (
         <>
-            <img src={imageUrl} title={displayName} alt={displayName} />
+            <img src={imageUrl} width={400} height={400} title={displayName} alt={displayName} />
         </>
     )
  } else return (
