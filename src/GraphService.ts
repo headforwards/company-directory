@@ -31,7 +31,7 @@ export const getEvents = async (accessToken: any) => {
   return events
 }
 
-export async function getPeople(accessToken: string) {
+export async function getPeople(accessToken: any) {
   const client = getAuthenticatedClient(accessToken)
 
   const people = await client
