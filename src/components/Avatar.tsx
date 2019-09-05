@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { getPhotoForUser } from '../GraphService'
+import UserAvatar from './NavBar/UserAvatar'
 
 
 interface AvatarProps {
@@ -7,6 +8,13 @@ interface AvatarProps {
     userId: string | undefined,
     displayName?: string
 }
+
+const emptyAvatarStyle= {
+    width: '200px', 
+    fontSize:'80px',
+    textAlign: 'center',
+    color: 'lightslategray'
+} as any
 
 const Avatar: React.SFC<AvatarProps> = ({accessToken, userId, displayName}) => {
 
@@ -30,12 +38,17 @@ const Avatar: React.SFC<AvatarProps> = ({accessToken, userId, displayName}) => {
  if (imageUrl) {
     return (
         <>
-            <img src={imageUrl} width={400} height={400} title={displayName} alt={displayName} />
+
+            <img src={imageUrl} width={200} height={200} title={displayName} alt={displayName} />
         </>
     )
  } else return (
-     <>
-     </>
+     <div 
+     className="fas fa-user-circle fa-lg rounded-circle align-self-center mr-2"
+     style={emptyAvatarStyle}
+     >
+
+     </div>
  )
 
 }
